@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Float, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship, backref
 from database import Base
 
@@ -17,8 +17,9 @@ class Bill(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True, nullable=False)
-    sum = Column(Integer, nullable=False)
+    sum = Column(Float, nullable=False)
     category = Column(String, unique=True, nullable=False)
+    data = Column(String, unique=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', backref=backref('bills', lazy=True))
 
@@ -37,8 +38,7 @@ class History(Base):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', backref=backref('history', lazy=True))
 
-    def __repr__(self):
-        return '<History %r>' % self.name
+
 
     def to_dict(self):
         return {'id': self.id, 'id_bill': self.id_bill, 'user_id': self.user_id}
