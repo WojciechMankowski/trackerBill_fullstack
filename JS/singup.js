@@ -1,4 +1,4 @@
-const url = `http://127.0.0.1:5000`;
+const url = `http://127.0.0.1:8000`;
 const userName = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("passworduser");
@@ -7,8 +7,9 @@ const saveUser = (event) => {
   const userNameValue = userName.value;
   const emailValue = email.value;
   const passwordValue = password.value;
-
-  const URL = `${url}/add/user/${userNameValue}/${emailValue}/${passwordValue}`;
+  // ?name=wojtek&password=Wojtek92%21&email=wojtek
+  // const URL = password=&email=${emailValue}
+  const URL = `http://127.0.0.1:8000/add/user?name=${userNameValue}&password=${passwordValue}&email=${emailValue}`
   fetch(URL, {method: "POST"})
     .then((res) => res.json())
     .then((data) => {

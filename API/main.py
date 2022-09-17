@@ -37,7 +37,7 @@ async def get_history():
 # /category
 @app.post("/add/user")
 async def add_user(name: str, password: str, email: str):
-    # http://127.0.0.1:8000/add/user?name=wojtek&password=Wojtek92%21&email=wojtek
+    # http://127.0.0.1:8000/add/user/?name=wojtek&password=Wojtek92%21&email=wojtek
     user = User(username=name, hashed_password=password, email=email)
     session.add(user)
     session.commit()
