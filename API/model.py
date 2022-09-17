@@ -1,6 +1,6 @@
 from sqlalchemy import Float, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship, backref
-from database import Base
+from API.database import Base
 
 
 class User(Base):
