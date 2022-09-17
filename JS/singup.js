@@ -7,13 +7,13 @@ const saveUser = (event) => {
   const userNameValue = userName.value;
   const emailValue = email.value;
   const passwordValue = password.value;
-
-  const URL = `${url}/add/user/${userNameValue}/${emailValue}/${passwordValue}`;
+  // /user?name=wojtek&password=Wojtek92%21&email=wojtek
+  const URL = `${url}/add/user/?name=${userNameValue}&password${passwordValue}&email=${emailValue}`;
   fetch(URL, {method: "POST"})
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    })
+    .then((res) => console.log(res))
+    // .then((data) => {
+    //   console.log(data);
+    // })
     .catch((err) => console.log(err));
 };
 
