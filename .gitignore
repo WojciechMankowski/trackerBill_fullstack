@@ -4,3 +4,6 @@
 .idea/*
 .__pycache__/
 .__pycache__/*
+database.cpython-310.pyc
+main.cpython-310.pyc
+model.cpython-310.pyc
