@@ -15,27 +15,38 @@ def getUsers() -> list[UserSchema]:
 # noinspection PyTypeChecker
 def getBills() -> List[BillSchema]:
     bills_in_db = session.query(Bill).all()
+    print(bills_in_db)
     bills = [BillSchema(id=bill.id, name=bill.name, price=bill.sum, category=bill.category, user_id=bill.user_id,
                         date=bill.data) for bill in bills_in_db]
     return bills
 
+
 def getHistory():
     history_in_db = session.query(History).all()
-    history = [HistorySchema(id=history.id, user_id=history.user_id, id_bill=history.id_bill) for history in history_in_db]
+    history = [HistorySchema(id=history.id, user_id=history.user_id, id_bill=history.id_bill) for history in
+               history_in_db]
     bills = [fillterHistory(item.user_id, item.id_bill) for item in history]
     return bills
+
+
 def fillterHistory(user_id, id_bill):
     history = session.query(Bill).filter(Bill.user_id == user_id and Bill.id_bill == id_bill).first()
     return history
+
+
 def getIdUser(email, name):
     user = session.query(User).all()
     chosen_user = [item for item in user if item.email == email and item.username == name][0]
     return chosen_user.id
+
+
 def addUser(name, email, password):
     user = User(username=name, hashed_password=password, email=email)
     session.add(user)
     session.commit()
     return user
+
+
 def addBill(name, price, category, date, user_id):
     bill = Bill(name=name, sum=price,
                 category=category, data=date, user_id=user_id)
@@ -43,10 +54,15 @@ def addBill(name, price, category, date, user_id):
     # session.commit()
     return bill
 
+
 def addBillToHistory(user_id):
-    idBill = getHistory()[-1].id
-    history = History(user_id=user_id, id_bill=idBill)
+    idBill = getHistory()
+    # print(bool(idBill))
+    if idBill == []:
+        id = 1
+    else:
+        id = idBill[-1].id
+    history = History(user_id=user_id, id_bill=id)
     session.add(history)
     session.commit()
     return history
-

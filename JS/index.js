@@ -5,32 +5,44 @@ const cointerner = document.querySelector(".cointerner");
 
 let userNameValue, passwordValue, user, id;
 
-const getBills = () => { 
-  const URL =`${url}/bills`
+const getBills = () => {
+  const URL = `${url}/bills`;
   fetch(URL)
-  .then(response => response.json())
-  .then(response => {
-    const bills = response.filter(element => {
-      console.log(element)
-      return element.user_id == id
-    })
-    const div = renderList(bills)
-    cointerner.appendChild(div)
-  })
-// renderList
- }
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.detail != "No bills found") {
+        const bills = response.filter((element) => {
+          console.log(element, id);
+          return element.user_id == id;
+        });
+        console.log(bills);
+        const div = renderList(bills);
+        cointerner.appendChild(div);
+      } else {
+        console.log(response.detail);
+      }
+    });
+  // renderList
+};
 
 const addNewBill = (event) => {
-  event.preventDefault()
-  const input_add_bills_name = document.querySelector('.input_add_bills_name').value
-  const input_add_bills_date = document.querySelector('.input_add_bills_date').value
-  const input_add_bills_value =document.querySelector('.input_add_bills_value').value
-  const input_add_bills_category =  document.querySelector('.input_add_bills_category').value
-  const URL = `${url}/add/bill/?name=${input_add_bills_name}&price=${input_add_bills_value}&category=${input_add_bills_category}&dae=${input_add_bills_date}&user_id=${id}`
-  fetch(URL, {method: "POST"})
-  .then(response => console.log(response))
+  event.preventDefault();
+  const input_add_bills_name = document.querySelector(
+    ".input_add_bills_name"
+  ).value;
+  const input_add_bills_date = document.querySelector(
+    ".input_add_bills_date"
+  ).value;
+  const input_add_bills_value = document.querySelector(
+    ".input_add_bills_value"
+  ).value;
+  const input_add_bills_category = document.querySelector(
+    ".input_add_bills_category"
+  ).value;
+  const URL = `${url}/add/bill/${input_add_bills_name}/${input_add_bills_value}/${input_add_bills_category}/${input_add_bills_date}/${id}`;
+  fetch(URL, { method: "POST" }).then((response) => console.log(response.status));
+};
 
-}
 const getInfo = (user) => {
   const sinUp_p = document.querySelector("#singUp");
   const login = document.querySelector("#login");
@@ -60,23 +72,27 @@ const singIn = (event) => {
   fetch(URL)
     .then((response) => response.json())
     .then((response) => {
+      console.log(response);
       user = response.filter(
         (element) =>
           element.username == userNameValue &&
           element.hashed_password == passwordValue
       )[0];
       getInfo(user);
+      getBills()
     });
 };
 
 if (localStorage.getItem("user") != undefined) {
   const div = render();
   cointerner.appendChild(div);
-  user = JSON.parse(localStorage.getItem('user'))
-  id = user.id
-  const input_add_bills_submit = document.querySelector('.input_add_bills_submit')
-  input_add_bills_submit.addEventListener('click', addNewBill)
-  getBills()
+  user = JSON.parse(localStorage.getItem("user"));
+  id = user.id;
+  const input_add_bills_submit = document.querySelector(
+    ".input_add_bills_submit"
+  );
+  input_add_bills_submit.addEventListener("click", addNewBill);
+  getBills();
 } else {
   const tpl = document.createElement("template");
   tpl.innerHTML = `<article id="login">

@@ -15,6 +15,9 @@ export const render = () => {
 
     element_input2.type = 'number';
     element_input2.placeholder = 'Wartość';
+    element_input2.step = '0.01';
+
+
 
     element_input3.type = 'date';
     element_input3.placeholder = 'Data';
