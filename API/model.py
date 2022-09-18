@@ -16,10 +16,10 @@ class Bill(Base):
     __tablename__ = "bills"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True, nullable=False)
+    name = Column(String, nullable=False)
     sum = Column(Float, nullable=False)
-    category = Column(String, unique=True, nullable=False)
-    data = Column(String, unique=True, nullable=False)
+    category = Column(String, nullable=False)
+    data = Column(String)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', backref=backref('bills', lazy=True))
 

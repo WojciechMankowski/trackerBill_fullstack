@@ -13,9 +13,7 @@ const saveUser = (event) => {
   console.log(URL);
   fetch(URL, {method: "POST"})
     .then((res) => console.log(res))
-    // .then((data) => {
-    //   console.log(data);
-    // })
+    .then(data => console.log(data))
     .catch((err) => console.log(err));
 };
 
