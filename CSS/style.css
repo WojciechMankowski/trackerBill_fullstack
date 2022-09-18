@@ -6,3 +6,7 @@
 #singUp::before{
     content: attr(data-sing-up);
 }
+[data-sing-up]::before{
+    content: attr(data-sing-up);
+    background-color: pink;
+}

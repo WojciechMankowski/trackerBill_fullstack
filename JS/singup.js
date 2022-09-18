@@ -9,7 +9,8 @@ const saveUser = (event) => {
   const passwordValue = password.value;
 
   // /user?name=wojtek&password=Wojtek92%21&email=wojtek
-  const URL = `${url}/add/user/?name=${userNameValue}&password${passwordValue}&email=${emailValue}`;
+  const URL = `${url}/add/user/?name=${userNameValue}&email=${emailValue}&password=${passwordValue}`;
+  console.log(URL);
   fetch(URL, {method: "POST"})
     .then((res) => console.log(res))
     // .then((data) => {

@@ -1,70 +1,73 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from starlette.middleware.cors import CORSMiddleware
+
+from API.Helpers import getUsers, getBills, addUser
+from API.Schema import UserSchema, BillSchema, HistorySchema
 from API.database import engine, session, Base
 from API.model import Bill, History, User
 
 app = FastAPI()
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_credentials=True,
-#     allow_origins=["*"],
-#     allow_methods=["*"],
-#     allow_headers=["*"])
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
-    # allow_credentials=True,
-    # allow_methods=["*"],
-    # allow_headers=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 
 )
-# uvicorn main:app --reload
-# points API
-@app.get("/users")
-async def get_users():
-    return session.query(User).all()
+Base.metadata.create_all(bind=engine)
+
+# uvicorn API.main:app --reload
+
+@app.get("/users", status_code=200, response_model=list[UserSchema])
+async def get_users() -> list[UserSchema]:
+    users = getUsers()
+    if not users:
+        raise HTTPException(status_code=404, detail="No users found")
+    return users
 
 
-@app.get("/bills")
-async def get_bills():
-    return session.query(Bill).all()
+@app.get("/bills", status_code=200)
+async def get_bills() -> list[BillSchema]:
+    bills = getBills()
+    if not bills:
+        raise HTTPException(status_code=404, detail="No bills found")
+    return bills
 
 
-@app.get("/history")
-async def get_history():
+@app.get("/history", status_code=200, response_model=list[HistorySchema])
+async def get_history() -> list[HistorySchema]:
     history_bill = []
     history = session.query(History).all()
-    for item in history:
-        history_bill.append(
-            session.query(Bill).filter(Bill.id == item.id_bill and Bill.user_id == item.user_id).first())
-    return history_bill
+    if not history:
+        raise HTTPException(status_code=404, detail="No history found")
+    else:
+        for item in history:
+            history_bill.append(
+                session.query(Bill).filter(Bill.id == item.id_bill and Bill.user_id == item.user_id).first())
+        return history_bill
 
 
 # /category
-@app.post("/add/user/")
-async def add_user(name: str, password: str, email: str):
+@app.post("/add/user/", status_code=201, response_model=UserSchema)
+async def add_user(name, email, password) -> UserSchema:
     # http://127.0.0.1:8000/add/user/?name=wojtek&password=Wojtek92%21&email=wojtek
-    user = User(username=name, hashed_password=password, email=email)
+    user = addUser(name, email, password)
     session.add(user)
     session.commit()
-    return {"message": "user added"}
+    return user
 
 
-def add_bill_to_history(user_id: int, name):
+def add_bill_to_history(user_id: int, name) -> BillSchema:
     bill = session.query(Bill).filter(Bill.name == name).first()
-    print(bill.id)
-    print(bill.user_id)
     history = History(user_id=user_id, id_bill=bill.id)
     return history
 
 
-@app.post("/add/bill")
-def add_bill(name: str, price: float, category: str, date: str, user_id: int):
+@app.post("/add/bill", status_code=201, response_model=BillSchema)
+def add_bill(name: str, price: float, category: str, date: str, user_id: int) -> BillSchema:
     bill = Bill(name=name, sum=price, category=category, data=date, user_id=user_id)
     session.add(bill)
-
-    session.add(add_bill_to_history(user_id, name))
     session.commit()
-    return {"message": "bill added", "id1": bill.id}
+    return bill
