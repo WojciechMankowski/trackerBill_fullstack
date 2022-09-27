@@ -2,18 +2,16 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+    
 }
 #singUp::before {
 	content: attr(data-sing-up);
 }
-[data-sing-up]::before {
-	content: attr(data-sing-up);
-	background-color: pink;
-}
+
 
 body {
 	width: 100%;
-	font-size: 2em;
+    font-size: 2em;
 }
 .navbar{
     width: 100%;
@@ -50,9 +48,34 @@ nav ul li a {
     margin: 0 20px;
 }
 .add_bills{
+    width: 100%;
     padding: 12px 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+input{
+    width: 100%;
+    padding: 0 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+.bills{
+    width: 80%;
+    padding: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bill{
+    list-style: none;
+    padding: 12px 24px;
+}
+.category{
+    font-size: 1em;
+    font-weight: 800;
+}
+.data{
+    font-size: 0.75em;
 }

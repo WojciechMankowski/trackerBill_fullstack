@@ -12,17 +12,14 @@ const getBills = () => {
     .then((response) => {
       if (response.detail != "No bills found") {
         const bills = response.filter((element) => {
-          console.log(element, id);
           return element.user_id == id;
         });
-        console.log(bills);
         const div = renderList(bills);
         cointerner.appendChild(div);
       } else {
         console.log(response.detail);
       }
     });
-  // renderList
 };
 
 const addNewBill = (event) => {
