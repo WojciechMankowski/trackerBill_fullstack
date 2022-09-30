@@ -1,81 +1,105 @@
+:root {
+	--sizeOfChart: 70%;
+}
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-    
 }
 #singUp::before {
 	content: attr(data-sing-up);
 }
 
-
 body {
 	width: 100%;
-    font-size: 2em;
-}
-.navbar{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.navbar .logo{
-    width: 50%;
-    height: 100px;
-    margin-left: 50px;
+	font-size: 2em;
 }
 
-.navbar nav{
-    width: 50%;
-    height: 100px;
-    margin-right: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.logo {
+	width: 100%;
+	text-align: center;
+	line-height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	flex-wrap: wrap;
 }
-nav ul {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
+.logo button {
+	margin-left: 40%;
+	height: 50px;
+	width: 250px;
+	padding: 0 10px;
+	border: 1px solid #000;
+	border-radius: 5px;
 }
-nav ul li a {
-    text-decoration: none;
-    color: #000;
-    margin: 0 20px;
+.login {
+	width: 100%;
+	padding: 12px 24px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 }
-.add_bills{
-    width: 100%;
-    padding: 12px 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.login input, button {
+	width: 80%;
+	padding: 12px 24px;
+	margin: 12px 0;
+	border: 1px solid #000;
+	border-radius: 5px;
+	text-align: center;
 }
-input{
-    width: 100%;
-    padding: 0 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
+.add_bills {
+	width: 100%;
+	padding: 12px 24px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
-.bills{
-    width: 80%;
-    padding: 12px 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+input {
+	width: 100%;
+	padding: 0 10px;
+	border: 1px solid #000;
+	border-radius: 5px;
 }
-.bill{
-    list-style: none;
-    padding: 12px 24px;
+.bills {
+	width: 100%;
+	padding: 12px 24px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: last baseline;
 }
-.category{
-    font-size: 1em;
-    font-weight: 800;
+.bill {
+	width: 30%;
+	margin-bottom: 10px;
+	list-style: none;
+	padding: 12px 24px;
+	transition: all 0.3 case-in-out;
+	text-align: center;
 }
-.data{
-    font-size: 0.75em;
+.bill:hover {
+	box-shadow: rgba(50, 50, 92, 0.25) 0px 13px 27px -5px,
+		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.category {
+	font-size: 1em;
+	font-weight: 800;
+}
+.data {
+	font-size: 0.75em;
+}
+.div_chart {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.chart {
+	width: var(--sizeOfChart) !important;
+	height: var(--sizeOfChart) !important;
+	margin-right: auto;
+	margin-left: auto;
 }

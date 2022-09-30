@@ -14,6 +14,7 @@ app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_credentials=True,
 
 # uvicorn API.main:app --reload
 
+@app.get("/")
 @app.get("/users", status_code=200, response_model=list[UserSchema])
 async def get_users() -> list[UserSchema]:
     users = getUsers()
