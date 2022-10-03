@@ -1,6 +1,6 @@
-// div
-export const creatinElement = (noto, clasName) => {
-    const element = document.createElement(noto);
-    element.classList.add(clasName);
-    return element;
-}
+export const creatinElement = (noto, className, classInput = '') => {
+	const element = document.createElement(noto);
+	element.classList.add(className);
+	element.className += ` ${classInput}`;
+	return element;
+};

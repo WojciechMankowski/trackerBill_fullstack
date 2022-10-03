@@ -1,6 +1,14 @@
 :root {
 	--sizeOfChart: 70%;
+	--lightPurple: #7D64FE;
+    --darkPurple: #7860F3;
+    --bigCircleGrey: #DEE1E6;
+    --smallCircleRed: #FF6B6B;
+    --formTextAndBorders: #CECECE;
+    --mainWhite: #ffffff;
 }
+
+ 
 * {
 	margin: 0;
 	padding: 0;
@@ -42,7 +50,8 @@ body {
 	align-items: center;
 	text-align: center;
 }
-.login input, button {
+.login input,
+button {
 	width: 80%;
 	padding: 12px 24px;
 	margin: 12px 0;
@@ -58,11 +67,26 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-input {
+.input {
 	width: 100%;
-	padding: 0 10px;
-	border: 1px solid #000;
-	border-radius: 5px;
+	font-size: 1.5rem;
+    margin: 1em;
+    padding: .5em;
+	border: none;
+    border-bottom: 2px solid black;
+	text-align: center;
+}
+input:focus {
+	border-bottom: 2px solid black;
+}
+.button {
+	width: 100%;
+	font-size: 1.5rem;
+	margin: 1em;
+	padding: .5em;
+	background: transparent;
+	border: solid 1px black;
+	
 }
 .bills {
 	width: 100%;
@@ -71,7 +95,7 @@ input {
 	flex-wrap: wrap;
 	flex-direction: row;
 	align-items: center;
-	justify-content: last baseline;
+	justify-content: baseline;
 }
 .bill {
 	width: 30%;
@@ -102,4 +126,10 @@ input {
 	height: var(--sizeOfChart) !important;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+@media only screen and (max-width: 1300px) {
+	.logo button {
+		margin-left: 50px;
+	}
 }

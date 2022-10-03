@@ -102,6 +102,7 @@ if (localStorage.getItem('user') != undefined) {
 		'.input_add_bills_submit'
 	);
 	input_add_bills_submit.addEventListener('click', addNewBill);
+	// input_add_bills_submit.className
 	getBills();
 } else {
 	const tpl = render_login();

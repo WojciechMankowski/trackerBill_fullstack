@@ -4,15 +4,31 @@ import { renderChart } from './Chart.js';
 export const render = () => {
 	const element_div = creatinElement('div', 'add_bills');
 	const element_form = creatinElement('form', 'form_add_bills');
-	const element_input = creatinElement('input', 'input_add_bills_name');
-	const element_input2 = creatinElement('input', 'input_add_bills_value');
-	const element_input3 = creatinElement('input', 'input_add_bills_date');
+	const element_input = creatinElement(
+		'input',
+		'input_add_bills_name',
+		'input'
+	);
+	const element_input2 = creatinElement(
+		'input',
+		'input_add_bills_value',
+		'input'
+	);
+	const element_input3 = creatinElement(
+		'input',
+		'input_add_bills_date',
+		'input'
+	);
 	const element_input_submit = creatinElement(
 		'input',
-		'input_add_bills_submit'
+		'input_add_bills_submit', 'button'
 	);
-	const element_input_reset = creatinElement('input', 'input_add_bills_reset');
-	const element_select = creatinElement('input', 'input_add_bills_category');
+	const element_input_reset = creatinElement('input', 'input_add_bills_reset', 'button');
+	const element_select = creatinElement(
+		'input',
+		'input_add_bills_category',
+		'input'
+	);
 
 	element_input.type = 'text';
 	element_input.placeholder = 'Nazwa rachunku';
